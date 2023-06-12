@@ -1,5 +1,6 @@
 $(".col").click(function (e) { 
     playSound($(this).attr("id"));
+
 });
 
 

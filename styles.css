@@ -11,10 +11,6 @@ body{
     display: inline-block;
 }
 
-.row{
-    
-}
-
 .col{
     display: inline-block;
     padding: 6%;
@@ -26,7 +22,6 @@ body{
 #red{
     background-color: red;
 }
-
 #blue{
     background-color: blue;
 }
