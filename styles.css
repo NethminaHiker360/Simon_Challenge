@@ -12,27 +12,27 @@ body{
 }
 
 .row{
-    padding: 1%;
+    
 }
 
 .col{
     display: inline-block;
     padding: 6%;
-    margin-right: 2%;
-    border-radius: 10%;
+    margin: 1%;
+    border-radius: 15%;
     border: solid 0.5rem;
 }
 
-.red{
+#red{
     background-color: red;
 }
 
-.blue{
+#blue{
     background-color: blue;
 }
-.green{
+#green{
     background-color: green;
 }
-.yellow{
+#yellow{
     background-color: yellow;
 }
