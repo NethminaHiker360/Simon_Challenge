@@ -1,7 +1,6 @@
-$('.col').click(function (e) {
-  playSound($(this).attr('id'));
-  gameOver();
-});
+
+
+//===========================Variables=================================
 
 var colorId = {
   0: 'red',
@@ -10,9 +9,35 @@ var colorId = {
   3: 'yellow',
 };
 
-function animateButton(value) {}
+var array=[];
+
+
+
+//====================button click Trigger=======================
+
+function buttonClickTrigger(){
+  $('.col').click(function (e) {
+    var buttonId = $(this).attr('id');
+    playSound(buttonId);
+    animateButton(buttonId);
+  });
+}
+
+
+//================================================================
+
+function sequense(){
+  array.push(generateRandomNumber());
+}
+
+function animateButton(idvalue) {
+
+}
+
+//====================Game Over State (Done)========================
 
 function gameOver() {
+  playSound();
   $('.level').text('Game Over, Press Any Key to Restart');
   $('body').attr('class', 'wrong');
   setTimeout(function () {
@@ -20,14 +45,15 @@ function gameOver() {
   }, 100);
 }
 
+//===========================================================
+
 function generateRandomNumber() {
   return Math.round(Math.random() * 3);
 }
 
-//==============================Play Sound===================================
-function playSound(value) {
-  animateButton(value);
-  switch (value) {
+//==============================Play Sound (done)===================================
+function playSound(idvalue) {
+  switch (idvalue) {
     case 'blue':
       new Audio('sounds/blue.mp3').play();
       break;
