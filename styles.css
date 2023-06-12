@@ -1,0 +1,38 @@
+body{
+    background-color: #F8FFDB;
+    font-family: 'Chakra Petch', sans-serif;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.box{
+    display: block;
+    background-color: aqua;
+    display: inline-block;
+}
+
+.row{
+    padding: 1%;
+}
+
+.col{
+    display: inline-block;
+    padding: 6%;
+    margin-right: 2%;
+    border-radius: 10%;
+    border: solid 0.5rem;
+}
+
+.red{
+    background-color: red;
+}
+
+.blue{
+    background-color: blue;
+}
+.green{
+    background-color: green;
+}
+.yellow{
+    background-color: yellow;
+}
