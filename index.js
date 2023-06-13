@@ -16,6 +16,7 @@ start();
 
 function start() {
   $(document).keypress(function (e) {
+    $(".level").text("Level 01");
     startGame();
   });
 }
@@ -29,7 +30,7 @@ function startGame() {
 
 
 
-//===========check userpattern & generatedPattern (DONE)================
+//===========check ?? userpattern===generatedPattern ?? (DONE)================
 
 function checkPatternMatch() {
   return JSON.stringify(generatedPattern) === JSON.stringify(userInputPattern);
@@ -40,8 +41,8 @@ function checkPatternMatch() {
 function buttonClickTrigger() {
   $('.col').click(function (e) {
     let buttonId = $(this).attr('id'); //get triggerd button id
-    playSound(buttonId);
     buttonAnimate(buttonId);
+    playSound(buttonId);
   });
 }
 
@@ -54,8 +55,6 @@ function generateValue() {
   playSound(key);
   buttonAnimate(key);
 }
-
-//==========================Generate Random Number (DONE)=================================
 
 function RandomNumber() {
   return Math.round(Math.random() * 3) + 1;
