@@ -1,78 +1,64 @@
-start();
-
-
-function start(){
-  buttonClickTrigger();
-  generateValue();
-    
-}
-
 //===========================Variables=================================
 
 var colorId = {
-  'red':1,
-  'green':2,
-  'blue':3,
-  'yellow':4,
+  red: 1,
+  green: 2,
+  blue: 3,
+  yellow: 4,
 };
 
-var generatedPattern=[];
-var userInputPattern=[];
+var generatedPattern = [];
+var userInputPattern = [];
 
-//==============================user input Array=======================
+//==========================MAIN=======================
 
-function userPattern(key){
-  userInputPattern.push(colorId[key]);
-}
+start();
 
-//===========check userpattern & generate3dPattern================
-
-function checkPatternMatch(){
-  if(userInputPattern===generatedPattern){
-    console.log("true");
-  }
-}
-
-//========================When mouse click get button keyValue===========================
-
-
-function checkPatternByNumber(key){  //key="id"
-  let keyValue=colorId[key];
-  for (let i = 0; i < generatedPattern.length; i++) {
-    const element = array[i];
-  }
-}
-
-
-
-//====================button click Trigger=======================
-
-function buttonClickTrigger(){
-  $('.col').click(function (e) {
-    let buttonId = $(this).attr('id'); //get triggerd button id
-    playSound(buttonId);
-  
-    userPattern(buttonId);
-
-    console.log("User: "+userInputPattern);
-
+function start() {
+  $(document).keypress(function (e) {
+    startGame();
   });
 }
 
+//==============================================
 
-//================================================================
-
-function generateValue(){
-  var generateNumber=RandomNumber();
-  generatedPattern.push(generateNumber);
-  // let key=Object.keys(colorId).find(k=>colorId[k]===generateNumber);
-  console.log("generate: "+generateNumber);
+function startGame() {
+  generateValue();
+  buttonClickTrigger();
 }
 
 
 
-function animateButton(idvalue) {
+//===========check userpattern & generatedPattern (DONE)================
 
+function checkPatternMatch() {
+  return JSON.stringify(generatedPattern) === JSON.stringify(userInputPattern);
+}
+
+//====================button click Trigger (DONE)=======================
+
+function buttonClickTrigger() {
+  $('.col').click(function (e) {
+    let buttonId = $(this).attr('id'); //get triggerd button id
+    playSound(buttonId);
+    buttonAnimate(buttonId);
+  });
+}
+
+//======================Generate Pattern & Play Sound (Done)====================================
+
+function generateValue() {
+  let generateNumber = RandomNumber();
+  generatedPattern.push(generateNumber);
+  let key = Object.keys(colorId).find((k) => colorId[k] === generateNumber);
+  playSound(key);
+  buttonAnimate(key);
+}
+
+//==========================Generate Random Number (DONE)=================================
+
+function RandomNumber() {
+  return Math.round(Math.random() * 3) + 1;
 }
 
 //====================Game Over State (Done)========================
@@ -86,13 +72,16 @@ function gameOver() {
   }, 100);
 }
 
-//===========================================================
+//====================Button Animate (Done)========================
 
-function RandomNumber() {
-  return (Math.round(Math.random() * 3))+1;
+function buttonAnimate(key) {
+  $('#' + key).addClass('animateButton');
+  setTimeout(function(){
+    $('#' + key).removeClass('animateButton');
+  },200);
 }
 
-//==============================Play Sound (done)===================================
+//==============================Play Sound (DONE)===================================
 function playSound(idvalue) {
   switch (idvalue) {
     case 'blue':

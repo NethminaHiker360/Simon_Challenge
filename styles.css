@@ -11,9 +11,10 @@ body{
     display: inline-block;
 }
 
-.animate_button{
+.animateButton{
     transform: scale(1.1);
     box-shadow: 1rem 1rem 1rem black;
+    opacity: .7;
 }
 
 .col{
