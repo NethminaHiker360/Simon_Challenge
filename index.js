@@ -1,15 +1,47 @@
+start();
 
+
+function start(){
+  buttonClickTrigger();
+  generateValue();
+    
+}
 
 //===========================Variables=================================
 
 var colorId = {
-  0: 'red',
-  1: 'green',
-  2: 'blue',
-  3: 'yellow',
+  'red':1,
+  'green':2,
+  'blue':3,
+  'yellow':4,
 };
 
-var array=[];
+var generatedPattern=[];
+var userInputPattern=[];
+
+//==============================user input Array=======================
+
+function userPattern(key){
+  userInputPattern.push(colorId[key]);
+}
+
+//===========check userpattern & generate3dPattern================
+
+function checkPatternMatch(){
+  if(userInputPattern===generatedPattern){
+    console.log("true");
+  }
+}
+
+//========================When mouse click get button keyValue===========================
+
+
+function checkPatternByNumber(key){  //key="id"
+  let keyValue=colorId[key];
+  for (let i = 0; i < generatedPattern.length; i++) {
+    const element = array[i];
+  }
+}
 
 
 
@@ -17,18 +49,27 @@ var array=[];
 
 function buttonClickTrigger(){
   $('.col').click(function (e) {
-    var buttonId = $(this).attr('id');
+    let buttonId = $(this).attr('id'); //get triggerd button id
     playSound(buttonId);
-    animateButton(buttonId);
+  
+    userPattern(buttonId);
+
+    console.log("User: "+userInputPattern);
+
   });
 }
 
 
 //================================================================
 
-function sequense(){
-  array.push(generateRandomNumber());
+function generateValue(){
+  var generateNumber=RandomNumber();
+  generatedPattern.push(generateNumber);
+  // let key=Object.keys(colorId).find(k=>colorId[k]===generateNumber);
+  console.log("generate: "+generateNumber);
 }
+
+
 
 function animateButton(idvalue) {
 
@@ -47,8 +88,8 @@ function gameOver() {
 
 //===========================================================
 
-function generateRandomNumber() {
-  return Math.round(Math.random() * 3);
+function RandomNumber() {
+  return (Math.round(Math.random() * 3))+1;
 }
 
 //==============================Play Sound (done)===================================
