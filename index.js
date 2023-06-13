@@ -7,8 +7,10 @@ var colorId = {
   yellow: 4,
 };
 
-var generatedPattern = [];
-var userInputPattern = [];
+var gameLevel = 0;
+
+var generatedPattern = []; //store by number
+var userInputPattern = []; //store by number
 
 //==========================MAIN=======================
 
@@ -16,19 +18,23 @@ start();
 
 function start() {
   $(document).keypress(function (e) {
-    $(".level").text("Level 01");
+    $('.level').text('Level ' + ++gameLevel);
     startGame();
   });
 }
-
-//==============================================
 
 function startGame() {
   generateValue();
   buttonClickTrigger();
 }
 
+//===============Reset game=============
 
+function resetGame() {
+  gameLevel = 0;
+  generatedPattern = [];
+  userInputPattern = [];
+}
 
 //===========check ?? userpattern===generatedPattern ?? (DONE)================
 
@@ -41,8 +47,16 @@ function checkPatternMatch() {
 function buttonClickTrigger() {
   $('.col').click(function (e) {
     let buttonId = $(this).attr('id'); //get triggerd button id
+    userInputPattern.push(colorId[buttonId]);
     buttonAnimate(buttonId);
     playSound(buttonId);
+
+    if (checkPatternMatch()) {
+      startGame();
+    } else {
+      gameOver();
+      resetGame();
+    }
   });
 }
 
@@ -52,8 +66,10 @@ function generateValue() {
   let generateNumber = RandomNumber();
   generatedPattern.push(generateNumber);
   let key = Object.keys(colorId).find((k) => colorId[k] === generateNumber);
-  playSound(key);
-  buttonAnimate(key);
+  setTimeout(function () {
+    buttonAnimate(key);
+    playSound(key);
+  },800);
 }
 
 function RandomNumber() {
@@ -75,9 +91,9 @@ function gameOver() {
 
 function buttonAnimate(key) {
   $('#' + key).addClass('animateButton');
-  setTimeout(function(){
+  setTimeout(function () {
     $('#' + key).removeClass('animateButton');
-  },200);
+  }, 200);
 }
 
 //==============================Play Sound (DONE)===================================
