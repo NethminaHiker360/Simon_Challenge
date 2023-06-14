@@ -1,4 +1,4 @@
-//===========================Variables=================================
+//===========================Variables==================
 
 var colorId = {
   red: 1,
@@ -18,7 +18,7 @@ start();
 
 function start() {
   $(document).keypress(function (e) {
-    $('.level').text('Level ' + ++gameLevel);
+    $('.level').text('Level ' + (gameLevel + 1));
     startGame();
   });
 }
@@ -38,26 +38,25 @@ function resetGame() {
 
 //===========check ?? userpattern===generatedPattern ?? (DONE)================
 
-function checkPatternMatch() {
-  return JSON.stringify(generatedPattern) === JSON.stringify(userInputPattern);
+function checkPatternMatch(userNumber) {
+  for (let i = 0; i < generatedPattern.length; i++) {
+    const element = array[i];
+  }
 }
 
 //====================button click Trigger (DONE)=======================
 
 function buttonClickTrigger() {
-  $('.col').click(function (e) {
-    let buttonId = $(this).attr('id'); //get triggerd button id
-    userInputPattern.push(colorId[buttonId]);
-    buttonAnimate(buttonId);
-    playSound(buttonId);
-
-    if (checkPatternMatch()) {
-      startGame();
-    } else {
-      gameOver();
-      resetGame();
-    }
-  });
+  for (let i = 0; i < generatedPattern.length; i++) {
+    $('.col').click(function (e) {
+      var buttonId = $(this).attr('id'); //get triggerd button id
+      buttonAnimate(buttonId);
+      playSound(buttonId);
+      if (generatedPattern[i] !== colorId[buttonId]) {
+        gameOver();
+      }
+    });
+  }
 }
 
 //======================Generate Pattern & Play Sound (Done)====================================
@@ -69,16 +68,17 @@ function generateValue() {
   setTimeout(function () {
     buttonAnimate(key);
     playSound(key);
-  },800);
+  }, 800);
 }
 
 function RandomNumber() {
   return Math.round(Math.random() * 3) + 1;
 }
 
-//====================Game Over State (Done)========================
+//====================Game-Over State (Done)========================
 
 function gameOver() {
+  resetGame();
   playSound();
   $('.level').text('Game Over, Press Any Key to Restart');
   $('body').attr('class', 'wrong');
@@ -120,5 +120,3 @@ function playSound(idvalue) {
       break;
   }
 }
-
-//===========================================================================
